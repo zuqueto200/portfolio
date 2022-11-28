@@ -1,0 +1,82 @@
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background-color: #2c3e50;
+  font-family: Montserrat;
+}
+.textoLegal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #162029d0;
+  height: 100px;
+  width: 100vw;
+  color: #fff;
+  text-align: center;
+}
+
+.itensFooter {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.itemF {
+  margin: 30px 0;
+  text-align: center;
+  min-width: 330px;
+  min-height: 250px;
+  width: 330px;
+  height: 250px;
+  color: #fff;
+}
+.imgRede:hover {
+  filter: grayscale(0);
+}
+.divImg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  width: 100px;
+  height: 100px;
+}
+.divImg::before {
+  content: '';
+  z-index: 1;
+  position: absolute;
+  content: "";
+  width: 0px;
+  height: 0px;
+  opacity: 1;
+  border-radius: 50%;
+  border: solid;
+  background-color: rgba(255, 255, 255, 0.329);
+  transition: all .3s ;
+}
+.divImg:hover::before {
+  width: 80px;
+  height: 80px;
+  opacity: 0;
+}
+ 
+.imgRede {
+  z-index: 2;
+  position: relative;
+  width: 50px;
+  cursor: pointer;
+}
+
+.tituloFooter {
+  font-size: 25px;
+  font-weight: 900;
+  margin-bottom: 30px;
+}
+.todasRedes {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+/* *{background-color: rgba(98, 0, 255, 0.247);} */

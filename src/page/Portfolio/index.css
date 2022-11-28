@@ -1,0 +1,50 @@
+.portfolio {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column-reverse;
+  align-items: center; 
+}
+.portfolioTitulo {
+  color: #2c3e50;
+  font-size: 60px;
+  font-weight: 900;
+  font-family: Montserrat;
+  margin-top: 50px;
+}
+.separadorPortfolio {
+  display: flex;
+  margin-top: 50px;
+  margin-bottom: 40px;
+  max-width: 500px;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+}
+.linhaEscura {
+  background-color: #2c3e50;
+  height: 4px;
+  width: 50vw;
+  margin: 0 20px;
+  border-radius: 2px;
+}
+.divisaoCentroPortfolio {
+  width: 30px;
+}
+.gradePortfolio {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 960px;
+  margin-bottom: 100px;
+}
+.itemsportfolio {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 100px;
+  background-color: #2c3e502d;
+  margin: 10px;
+  width: 300px;
+  height: 300px;
+  border-radius: 30px;
+}

@@ -1,0 +1,64 @@
+@import url("https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap");
+
+
+@media screen and (max-width: 650px) {
+  .divName {
+  max-width: 350px;
+  }
+}
+
+.divName {
+    font-size: 40px;
+    display: block;
+    font-family: "Archivo Black";
+    color: #fff; 
+    margin-top: 50px;
+    
+  }
+  
+.spanStart{
+    visibility:hidden;
+}
+.divOla, .divSou, .divDev{
+  margin-bottom: -20px;
+  text-align: center;
+}
+
+  .spanOla,
+  .spanSou,
+  .spanDev {
+    text-align: center;
+    min-width: 20px;
+    overflow: hidden;
+  }
+  span {
+    display: inline-block;
+  }
+ 
+  .tonhoin {
+    animation: tonhoin 1000ms ease-in-out;
+  }
+  
+  @keyframes tonhoin {
+    0% {
+      color: #fff;
+    }
+  
+    20% {
+      transform: scaleX(1.6) scaleY(0.6);
+    }
+    40% {
+      transform: scaleX(0.6) scaleY(1.6);
+    }
+  
+    60% {
+      transform: scaleX(1.4) scaleY(0.8);
+    }
+    80% {
+      transform: scaleX(0.8) scaleY(1.4);
+    }
+    100% {
+      transform: scaleX(1) scaleY(1);
+    }
+  }
+  

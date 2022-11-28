@@ -1,0 +1,27 @@
+ .sobre{
+  display: flex;
+  justify-content: flex-end; 
+  flex-direction: column-reverse;
+  align-items: center; 
+  background-color: #1abc9c;
+ }
+ .sobreTitulo{
+  color: #fff;
+  font-size: 60px;
+  font-weight: 900;
+  font-family: Montserrat;
+  margin-top: 50px;
+}
+.textos{
+  display: flex;
+  margin-bottom: 50px;
+}
+article{
+  text-align: justify;
+  max-width: 600px;
+  width: 50%;
+  margin: 30px;
+  color: #fff;
+  font-size: 25px;
+  font-family: Montserrat;
+}
