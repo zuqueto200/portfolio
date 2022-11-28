@@ -1,8 +1,7 @@
 import React, { useRef, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Contato from "../Contato";
-import Footer from "../Footer";
-import Header from "../Header";
+import Footer from "../Footer"; 
 import Inicio from "../Inicio";
 import Portfolio from "../Portfolio";
 import Sobre from "../Sobre";
@@ -64,8 +63,7 @@ export default function Home() {
       <BrowserRouter>
         <Routes>{/* <Route path='/' element={<Header/>}/> */}</Routes>
       </BrowserRouter>
-
-      <Header />
+ 
       <Inicio />
       <div ref={pp}></div>
       <Portfolio />
