@@ -14,8 +14,7 @@ export default function Contato() {
   });
   const [validacao, setValidacao] = useState(false);
 
-  function fnEnvio() {
-    console.log("contato", contato);
+  function fnEnvio() { 
     
     if (contato.nome == "" || contato.nome == " ")
       setContato((prev) => ({
@@ -32,15 +31,13 @@ export default function Contato() {
         ...prev,
         mensagemErro: "O campo mensagem dever ser preenchido.",
       }));
-     
   }
 
-  
   useEffect(() => {
+    // fetch("https://swapi.dev/api/people").then(e => console.log('wwww',e.json()) )
 
-// fetch("https://swapi.dev/api/people").then(e => console.log('wwww',e.json()) )
+    // window.addEventListener('DOMContentLoaded', (event) => { console.log('sssssssssssssssssss',event)})
 
-    window.addEventListener('DOMContentLoaded', (event) => { console.log('sssssssssssssssssss',event)})
     setValidacao(false);
     if (
       contato.nome !== "" &&
@@ -103,14 +100,18 @@ export default function Contato() {
             <p className="aviso">{contato.mensagemErro}</p>
 
             {validacao && (
-              <button type="submit" onClick={fnEnvio} className="contatoEnviar" style={{background:'#088d04'}}>
+              <button
+                type="submit"
+                onClick={fnEnvio}
+                className="contatoEnviar"
+                style={{ background: "#088d04" }}>
                 ENVIAR
               </button>
             )}
           </form>
 
           {!validacao && (
-            <button onClick={fnEnvio} className="contatoEnviar" >
+            <button onClick={fnEnvio} className="contatoEnviar">
               ENVIAR
             </button>
           )}

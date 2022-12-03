@@ -1,6 +1,6 @@
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 800px) {
   .menuHeader {
-    display: none;
+    display: none !important;
   }
   
   .menuIconMobile {
@@ -45,8 +45,9 @@
   color: rgba(255, 255, 255, 0.418);
 }
 .menuHeader {
+  display: flex;
   color: #fff;
-  margin-right: 50px;
+  margin-right: 80px;
   width: 400px;
   min-width: 410px;
 }
@@ -64,3 +65,8 @@
 .menuItem:hover {
   background-color: rgba(240, 248, 255, 0.062);
 }
+.imgAva{
+  width: 40px;
+  border-radius: 50%;
+}
+ 
