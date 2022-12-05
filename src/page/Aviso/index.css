@@ -1,29 +1,39 @@
-.avisoAlert {
+.avisoAlert{
   display: flex;
   justify-content: center;
   align-items: center;
   position: fixed;
+  z-index: 1010;
   top: -50px;
   left: 50%;
   transform: translate(-50%, 0%);
   height: 50px;
   min-width: 300px;
-  background-color: red;
   color: rgb(255, 255, 255);
   border-radius: 10px;
-  transition: all 2s;
   padding: 0 50px 0 30px;
   font-weight: 900;
-
+  font-size: 18px;
+  font-family: Montserrat;
+  transition: top 1s;
 }
 
 .mover {
   top: 10px;
 }
-.closeIcon{
-    position: absolute;
-    right: 0;
-    top: 0; 
-    margin: 5px;
-    cursor: pointer;
+.closeIcon {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 5px;
+  cursor: pointer;
+}
+.vermelho {
+  background-color: red;
+}
+.laranja {
+  background-color: rgb(255, 166, 0);
+}
+.verde {
+  background-color: rgb(47, 150, 0);
 }

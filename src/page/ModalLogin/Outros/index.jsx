@@ -7,19 +7,64 @@ import FB from "../../../assets/img/fb.png";
 import GG from "../../../assets/img/gg.png";
 import { auth } from "../../../services/firebaseConfig";
 import "./index.css";
-import { loadReducer } from "../../../store/items"; 
+import { loadReducer } from "../../../store/items/Load";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { avisoReducer } from "../../../store/items/Aviso";
 
 export default function Outros() {
+  const navigate = useNavigate();
+
   const [signInWithGoogle, userGoogle, loadingGoogle, errorGoogle] =
     useSignInWithGoogle(auth);
   const [signInWithFacebook, userFacebook, loadingFacebook, errorFacebook] =
     useSignInWithFacebook(auth);
   const dispatch = useDispatch();
 
-  dispatch(loadReducer(loadingGoogle || loadingFacebook ? true : false));
-   
+  useEffect(() => {
+    dispatch(loadReducer(loadingGoogle || loadingFacebook ? true : false));
+  }, [loadingGoogle, loadingFacebook]);
+ 
+  
+ 
+  useEffect(()=>{
 
+    if (errorGoogle?.code == "auth/popup-closed-by-user" ){ dispatch(avisoReducer(["vermelho", "Você não completou o login do Google!"]))}  
+    if (errorFacebook?.code == "auth/popup-closed-by-user" ){ dispatch(avisoReducer(["vermelho", "Você não completou o login do Facebook!"]))}  
+
+  },[errorGoogle, errorFacebook])
+
+
+ 
+
+
+  function fnFacebook() {
+    signInWithFacebook()
+    .then((res) => {
+      if (res.operationType == "signIn") navigate("/");
+      dispatch(avisoReducer(["verde", "Você esta Logado com o Facebook!"]));
+    })
+    .catch((err) => {
+      console.error(err);
+      })
+      .finally(() => {
+        dispatch(loadReducer(false));
+      });
+  }
+  function fnGoogle() {
+    signInWithGoogle()
+      .then((res) => {
+        if (res.operationType == "signIn") navigate("/");
+        dispatch(avisoReducer(["verde", "Você esta Logado com o Google!"]));
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+      .finally(() => {
+        dispatch(loadReducer(false));
+      });
+    }
+    
   return (
     <>
       <div className="separadorcontato">
@@ -36,7 +81,7 @@ export default function Outros() {
       <button
         className="btnFb btnOutros"
         onClick={() => {
-          signInWithFacebook();
+          fnFacebook();
         }}>
         <img src={FB} alt="logo do facebook" />{" "}
         <span> Continuar com Facebook</span>
@@ -44,7 +89,7 @@ export default function Outros() {
       <button
         className="btnGg btnOutros"
         onClick={() => {
-          signInWithGoogle();
+          fnGoogle();
         }}>
         <img src={GG} alt="logo do Google" /> <span> Continuar com Google</span>
       </button>

@@ -1,35 +1,97 @@
 import { TextField } from "@mui/material";
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "../index.css";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 
 import { GrClose } from "react-icons/gr";
-import { auth } from "../../../services/firebaseConfig"; 
+import { auth } from "../../../services/firebaseConfig";
 import Outros from "../Outros";
-import { loadReducer } from "../../../store/items"; 
 import { useDispatch } from "react-redux";
+import { loadReducer } from "../../../store/items/Load";
+import { avisoReducer } from "../../../store/items/Aviso";
 export default function Cadastro() {
-  const [login, setLogin] = useState({
+  const [cadastro, setCadastro] = useState({
     email: "",
-    erroEmail: "",
+    emailErro: "",
     senha: "",
-    erroSenha: "",
+    senhaErro: "",
   });
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
 
-  function fnCadastrar(e) {
-    e.preventDefault();
-    createUserWithEmailAndPassword(login.email, login.senha);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [validacao, setValidacao] = useState(false);
+
+  useEffect(() => {
+    dispatch(loadReducer(loading ? true : false));
+  }, [loading]);
+
+  useEffect(() => {
+    if (error?.code == "auth/email-already-in-use") {
+      dispatch(
+        avisoReducer([
+          "vermelho",
+          "Este email já está sendo usado por outro usuário.",
+        ])
+      );
+    }
+    if (error?.code == "auth/invalid-email") {
+      dispatch(avisoReducer(["vermelho", "Este email é invalido."]));
+    }
+  }, [error]);
+
+  function fnCadastrar() {
+    if (validacao) {
+      createUserWithEmailAndPassword(cadastro.email, cadastro.senha)
+        .then((res) => {
+          if (res.operationType == "signIn") {
+            navigate("/");
+          }
+
+          dispatch(avisoReducer(["verde", "Bem vindo, Cadastro realizado com sucesso!"]));
+          dispatch(loadReducer(false));
+        })
+        .catch((err) => {
+          console.error(err);
+          // console.log("error", error.code);
+        })
+
+        .finally(() => {});
+    } else {
+      fnEnviar();
+    }
   }
 
-  const dispatch = useDispatch();
+  function fnEnviar() {
+    if (
+      cadastro.email == "" ||
+      cadastro.email.includes("@") == false ||
+      cadastro.email.includes(".") == false
+    )
+      setCadastro((prev) => ({
+        ...prev,
+        emailErro: "E-mail invalido.",
+      }));
+    if (cadastro.senha.length < 5)
+      setCadastro((prev) => ({
+        ...prev,
+        senhaErro: "A senha deve atender aos requisitos.",
+      }));
+  }
 
-  dispatch(loadReducer(loading ? true : false));
-   
-
-  
+  useEffect(() => {
+    setValidacao(false);
+    if (
+      cadastro.email !== "" &&
+      cadastro.email.includes(".") &&
+      cadastro.email.includes("@") &&
+      cadastro.senha.length >= 6
+    ) {
+      setValidacao(true);
+    }
+  }, [cadastro]);
 
   return (
     <>
@@ -46,33 +108,35 @@ export default function Cadastro() {
             label="Email"
             name="email"
             color="success"
-            value={login.email}
+            value={cadastro.email}
             onChange={(e) => {
-              setLogin((prev) => ({ ...prev, email: e.target.value }));
-              setLogin((prev) => ({ ...prev, emailErro: "" }));
+              setCadastro((prev) => ({ ...prev, email: e.target.value }));
+              setCadastro((prev) => ({ ...prev, emailErro: "" }));
             }}
             style={{ width: "100%", margin: "10px 0 0 0" }}
           />
-          <p className="aviso">{login.emailErro}</p>
+          <p className="aviso">{cadastro.emailErro}</p>
 
           <TextField
             id="outlined-required"
             label="Senha"
             name="senha"
             color="success"
-            value={login.senha}
+            value={cadastro.senha}
             onChange={(e) => {
-              setLogin((prev) => ({ ...prev, senha: e.target.value }));
-              setLogin((prev) => ({ ...prev, senhaErro: "" }));
+              setCadastro((prev) => ({ ...prev, senha: e.target.value }));
+              setCadastro((prev) => ({ ...prev, senhaErro: "" }));
             }}
             style={{ width: "100%", margin: "10px 0 0 0" }}
           />
-          <p className="aviso">{login.senhaErro}</p>
-     
+          <p className="aviso">{cadastro.senhaErro}</p>
+
           <button className="contatoEnviar" onClick={fnCadastrar}>
-            ENVIAR
+            Enviar
           </button>
-          <Outros/>
+
+          <Outros />
+
           <Link to="/login">
             <span style={{ textAlign: "center" }}>Ir para Login</span>
           </Link>

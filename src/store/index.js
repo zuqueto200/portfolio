@@ -1,9 +1,11 @@
 import { createStore, combineReducers } from 'redux'
 
-import itemLoad from './items';
+import load from './items/Load';
+import aviso from './items/Aviso';
 
 const rootReducer = combineReducers({
-  loading: itemLoad
+  loading: load,
+  avisando: aviso,
 
 })
 

@@ -1,13 +1,14 @@
 import { TextField } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../../services/firebaseConfig";
 import "../index.css";
 import { GrClose } from "react-icons/gr";
 import Outros from "../Outros";
-import { loadReducer } from "../../../store/items";
+import { loadReducer } from "../../../store/items/Load";
 import { useDispatch } from "react-redux";
+import { avisoReducer } from "../../../store/items/Aviso";
 
 export default function Login() {
   const [login, setLogin] = useState({
@@ -21,7 +22,42 @@ export default function Login() {
 
   const dispatch = useDispatch();
 
-  dispatch(loadReducer(loading ? true : false));
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(loadReducer(loading ? true : false));
+  }, [loading]);
+ 
+  useEffect(()=>{
+
+    if (error?.code == "auth/user-disabled" ){ dispatch(avisoReducer(["vermelho", "Você foi bloqueado!"]))} 
+    if (error?.code == "auth/user-not-found" ){ dispatch(avisoReducer(["laranja", "E-mail não cadastrado!"]))} 
+    if (error?.code == "auth/wrong-password" ){ dispatch(avisoReducer(["vermelho", "Senha Inválida"]))} 
+    if (error?.code == "auth/invalid-email") {dispatch(avisoReducer(["vermelho", "Este email é invalido."]))} 
+
+  },[error])
+  
+  
+  
+  function fnEmaileSenha() {
+
+    signInWithEmailAndPassword(login.email, login.senha)
+      .then((res) => {
+
+        console.log('res',res)
+        if (res.operationType == "signIn") {
+          navigate("/");
+        }
+
+        dispatch(avisoReducer(["verde", "Login realizado com sucesso!"]));
+        dispatch(loadReducer(false));
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+      .finally(() => {});
+
+    }
 
   return (
     <>
@@ -67,9 +103,9 @@ export default function Login() {
 
           <button
             className="contatoEnviar"
-            onClick={() =>
-              signInWithEmailAndPassword(login.email, login.senha)
-            }>
+            onClick={() => {
+              fnEmaileSenha();
+            }}>
             Fazer login
           </button>
 

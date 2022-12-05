@@ -10,6 +10,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import AvatarLogin from './Avatar' 
 import { AppRoutes } from "../../routes/AppRoutes"; 
 import Load from "../Load";
+import Aviso from "../Aviso";
 
 export default function Home() {
   const pp = useRef(null);
@@ -60,6 +61,7 @@ export default function Home() {
       </div>
   
       <AppRoutes/>
+      <Aviso/>
       <Load/>
       <Inicio />
       <div ref={pp}></div>

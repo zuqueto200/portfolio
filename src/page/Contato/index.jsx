@@ -34,9 +34,6 @@ export default function Contato() {
   }
 
   useEffect(() => {
-    // fetch("https://swapi.dev/api/people").then(e => console.log('wwww',e.json()) )
-
-    // window.addEventListener('DOMContentLoaded', (event) => { console.log('sssssssssssssssssss',event)})
 
     setValidacao(false);
     if (
@@ -55,6 +52,7 @@ export default function Contato() {
     <>
       <div className="contato">
         <div className="form">
+        {/* target="_blanck"  */}
           <form action="https://formspree.io/f/mjvzdadw" method="POST">
             <TextField
               id="outlined-required"

@@ -6,11 +6,12 @@ import { useNavigate } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useSignOut } from "react-firebase-hooks/auth";
 import { auth } from "../../services/firebaseConfig";
-import Ava from "../../assets/img/ava.png";
-import Aviso from "../Aviso";
+import Ava from "../../assets/img/ava.png"; 
+import Sem from "../../assets/img/sem.png"; 
 
-import { loadReducer } from "../../store/items";
+import { loadReducer } from "../../store/items/Load";
 import { useDispatch } from "react-redux";
+import { avisoReducer } from "../../store/items/Aviso";
 
 export default function AvatarLogin() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -31,25 +32,39 @@ export default function AvatarLogin() {
     const auth = getAuth();
 
     onAuthStateChanged(auth, (user) => {
+      console.log('user',user)
       if (user) {
-        user.photoURL ? setDadosUser(user.photoURL) : setDadosUser(Ava);
-
-        console.log("on", user);
+        user.photoURL ? setDadosUser(user.photoURL) : setDadosUser(Sem);
       } else {
         setDadosUser(Ava);
-        console.log("off", user);
       }
     });
   }, [anchorEl]);
 
   const [signOut, loadingOut, errorOut] = useSignOut(auth);
 
-  dispatch(loadReducer(loadingOut ? true : false));
+  useEffect(() => {
+    dispatch(loadReducer(loadingOut ? true : false));
+  }, [loadingOut]);
+
+  function fnLogout() {
+    signOut()
+    .then((res) => {
+      if (res.operationType == "signIn") navigate("/");
+      dispatch(avisoReducer(["verde", "Logout realizado com sucesso!"]));
+    })
+    .catch((err) => {
+      console.error(err);
+      })
+      .finally(() => {
+        dispatch(loadReducer(false)); 
+      });
+  }
+
+
 
   return (
-    <div>
-      {/* <Aviso text='TESTANDO' /> */}
-      {/* {loadingOut && <Load />} */}
+    <div> 
       <Button
         aria-controls={open ? "demo-positioned-menu" : undefined}
         aria-haspopup="true"
@@ -87,12 +102,7 @@ export default function AvatarLogin() {
           Cadastrar
         </MenuItem>
         <MenuItem
-          onClick={async () => {
-            const success = await signOut();
-            if (success) {
-              handleClose();
-            }
-          }}>
+          onClick={fnLogout}>
           Sair
         </MenuItem>
       </Menu>
