@@ -67,6 +67,15 @@ export default function Outros() {
     
   return (
     <>
+     <span className="requisitosSenha">
+            <br />
+            <div>Por questões de segurança, a senha deve seguir os critérios abaixo:</div>
+            <br />
+            <div>•Mínimo 8 caracteres</div>
+            <div>•Pelo menos uma letra maiúscula</div>
+            <div>•Pelo menos um número</div>
+            <div>•Pelo menos um caracter especial (Ex.: !#@$&%*...)</div>
+          </span>
       <div className="separadorcontato">
         <div
           className="linhaEscura"

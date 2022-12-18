@@ -15,8 +15,7 @@
 }
 .separadorcontato {
     display: flex;
-    margin-top: 50px;
-    margin-bottom: 40px;
+    margin: 20px 0 ;
     max-width: 500px;
     width: 100%;
     justify-content: center;

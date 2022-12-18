@@ -52,10 +52,13 @@
 }
 .menuHeader {
   display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
   color: #fff;
   margin-right: 80px;
   width: 400px;
-  min-width: 410px;
+  max-width: 500px;
+  width: 100%;
 }
 .menuItem {
   margin: 0 15px;
