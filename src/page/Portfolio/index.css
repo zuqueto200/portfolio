@@ -1,3 +1,9 @@
+@media (max-width: 480px) {
+  .portfolioTitulo {
+    font-size: 40px !important;
+  }
+}
+
 .portfolio {
   display: flex;
   justify-content: flex-end;

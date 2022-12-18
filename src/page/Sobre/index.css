@@ -1,27 +1,42 @@
- .sobre{
+@media (max-width: 480px) {
+  .sobreTitulo {
+    font-size: 40px !important;
+  }
+}
+@media (max-width: 700px) {
+  article {
+    width: 90% !important;
+  }
+  .textos {
+    flex-direction: column;
+    align-items: center;
+    width: 90% !important;
+  }
+}
+.sobre {
   display: flex;
-  justify-content: flex-end; 
+  justify-content: flex-end;
   flex-direction: column-reverse;
-  align-items: center; 
+  align-items: center;
   background-color: #1abc9c;
- }
- .sobreTitulo{
+}
+.sobreTitulo {
   color: #fff;
   font-size: 60px;
   font-weight: 900;
   font-family: Montserrat;
   margin-top: 50px;
 }
-.textos{
+.textos {
   display: flex;
   margin-bottom: 50px;
 }
-article{
+article {
   text-align: justify;
   max-width: 600px;
   width: 50%;
   margin: 30px;
   color: #fff;
-  font-size: 25px;
+  font-size: 20px;
   font-family: Montserrat;
 }

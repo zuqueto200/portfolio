@@ -1,14 +1,14 @@
-import React, { useRef, useState } from "react"; 
+import React, {useRef, useState} from "react";
 import Contato from "../Contato";
 import Footer from "../Footer";
 import Inicio from "../Inicio";
 import Portfolio from "../Portfolio";
 import Sobre from "../Sobre";
 
-import "./index.css";  
-import { GiHamburgerMenu } from "react-icons/gi";  
-import AvatarLogin from './Avatar' 
-import { AppRoutes } from "../../routes/AppRoutes"; 
+import "./index.css";
+import {GiHamburgerMenu} from "react-icons/gi";
+import AvatarLogin from "./Avatar";
+import {AppRoutes} from "../../routes/AppRoutes";
 import Load from "../Load";
 import Aviso from "../Aviso";
 
@@ -18,21 +18,15 @@ export default function Home() {
   const cc = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
 
-
-
   function scroll(eleRef) {
     window.scrollTo({
       top: eleRef.current.offsetTop,
       behavior: "smooth",
     });
   }
-    
-
-
 
   return (
-    <> 
-
+    <>
       <div className="header">
         <span className="caixaLogo">
           <span className="logoHeader">DEVELOPER</span>
@@ -49,20 +43,15 @@ export default function Home() {
           </button>
           <button onClick={() => scroll(cc)} className="menuItem">
             {" "}
-            CONTATO 
+            CONTATO
           </button>
-          <AvatarLogin/>
- 
         </span>
-
-     
-
-       
+        <AvatarLogin />
       </div>
-  
-      <AppRoutes/>
-      <Aviso/>
-      <Load/>
+
+      <AppRoutes />
+      <Aviso />
+      <Load />
       <Inicio />
       <div ref={pp}></div>
       <Portfolio />

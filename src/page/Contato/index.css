@@ -1,4 +1,8 @@
- 
+@media (max-width: 480px) {
+  .contatoTitulo {
+    font-size: 40px !important;
+  }
+} 
 .contato{
     display: flex;
     justify-content: flex-end;
