@@ -39,6 +39,18 @@
     max-width: 700px;
     width: 80%;
   }
+  .contatoEnviarValido { 
+
+    cursor: pointer;
+    margin: 20px 0;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 0;
+    background-color: #088d04;
+    font-family: Montserrat;
+    color: #fff;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.267);
+  }
   .contatoEnviar { 
 
     cursor: pointer;

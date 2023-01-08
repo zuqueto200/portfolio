@@ -20,7 +20,7 @@
     visibility:hidden;
 }
 .divOla, .divSou, .divDev{
-  margin-bottom: -20px;
+  padding-bottom: -20px;
   text-align: center;
 }
 

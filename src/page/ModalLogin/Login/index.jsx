@@ -13,6 +13,7 @@ import ForcaSenha from "../../ForcaSenha";
 
 export default function Login() {
   const [validaSenha, setValidaSenha] = useState([false, false, false, false]);
+  const [botaoLiberado, setBotaoLiberado] = useState(false);
   const [contadorEtapaSenha, setContadorEtapaSenha] = useState(0);
   const [login, setLogin] = useState({
     email: "",
@@ -97,6 +98,15 @@ export default function Login() {
     setLogin((prev) => ({...prev, senha: e.target.value}));
     setLogin((prev) => ({...prev, senhaErro: ""}));
   }
+
+  useEffect(() => {
+    if (login.email.includes("@") && contadorEtapaSenha == 4) {
+      setBotaoLiberado(true);
+    } else {
+      setBotaoLiberado(false);
+    }
+  }, [contadorEtapaSenha]);
+
   return (
     <>
       <div className="backBlack">
@@ -141,14 +151,13 @@ export default function Login() {
           </span>
 
           <button
-            className="contatoEnviar"
+            className={botaoLiberado ? "contatoEnviarValido" : "contatoEnviar"}
+            disabled={!botaoLiberado}
             onClick={() => {
               fnEmaileSenha();
             }}>
             Fazer login
           </button>
-
-         
 
           <Outros />
           <Link to="/cadastro">
